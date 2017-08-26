@@ -5,12 +5,14 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Schema;
 using UnityEngine;
+
 //using Shuttle;
 //using shuttle = NMShuttle.Shuttle;
 
 public class shuttle_move : MonoBehaviour{
     private Rigidbody2D rigidBody;
-    public float speed = 1f;
+
+    public float speed=2f;
 //    public void clickTopButton(){
 //         transform.rotation = new Vector2();
 //    }
@@ -41,18 +43,37 @@ public class shuttle_move : MonoBehaviour{
 //     
 //        transform.rotation.eulerAngles.z = Mathf.Atan2((screenPos.y - transform.position.y), (screenPos.x - transform.position.x))*Mathf.Rad2Deg;
 //    }
+    private float limit = 2.5f;
+
+    private Vector2 direction;
+    private float distanceFromObject;
 
     void Update(){
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+       
+    }
+
+    void FixedUpdate(){
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y, Input.mousePosition.z - Camera.main.transform.position.z));
+        double dist = Math.Sqrt(Math.Pow(mousePosition.x - transform.position.x, 2) +
+                                Math.Pow(mousePosition.y - transform.position.y, 2));
+
+        float koef = (float) dist;
+        if (dist > limit){
+            koef = limit * (limit / koef);
+        }
+        transform.position = Vector2.Lerp(transform.position, mousePosition, koef / 100);
+        // Debug.Log(dist);
+        //  Vector3 relPosition = mousePosition - transform.position;
 //            childElementShuttle.transform.eulerAngles = new Vector3(0, 0,
 //                Mathf.Atan2((mousePosition.y - transform.position.y), (mousePosition.x - transform.position.x)) *
 //                Mathf.Rad2Deg);
-       
-        transform.position = Vector2.Lerp(transform.position, mousePosition, speed / 200);
-    }
 
-
-    void FixedUpdate(){
+//        direction = (mousePosition - transform.position).normalized;
+//        Debug.Log(direction);
+        //distanceFromObject = (mousePosition - Camera.main.WorldToScreenPoint(transform.position)).magnitude;
+//        rigidBody.AddForce(direction * speed * koef);
+        // rigidBody.AddForce(transform.forward * 0.2f);
+         
     }
 }
