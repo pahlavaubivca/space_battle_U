@@ -52,9 +52,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\button_action.cs" />
-    <Compile Include="Assets\scripts\Shuttle.cs" />
-    <Compile Include="Assets\scripts\shuttle_move.cs" />
+    <Compile Include="Assets\scripts\main\Shuttle.cs" />
+    <Compile Include="Assets\scripts\main\shuttle_move.cs" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
