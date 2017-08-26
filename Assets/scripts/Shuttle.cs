@@ -14,6 +14,6 @@ public class Shuttle : MonoBehaviour{
         transform.transform.eulerAngles = new Vector3(0, 0,
             Mathf.Atan2((mousePosition.y - transform.position.y), (mousePosition.x - transform.position.x)) *
             Mathf.Rad2Deg);
-        
+        Debug.Log(mousePosition);
     }
 }
