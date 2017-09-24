@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using main;
 
 public class GEvents : MonoBehaviour{
 //	public GameObject other;
 //	public Camera cam = other.GetComponent<Camera>();
-    private int count = 0;
-    void Update(){
+    private int _count = 0;
+
+    public void Update(){
         if (Input.GetMouseButtonDown(0)){
-            Debug.Log("i was clicked - " + count);
-            count++;
+            Fire.CalculateStart();
         }
     }
 //	void OnMouseDown(){ // efficient if need catch event on object, if need catch event everywere use Update method

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace main{
     public class ShuttleMove : MonoBehaviour{
-        private float limit = 2.5f;
+        private float _limit = 2.5f;
         private Vector3 _mousePosition;
         private double _dist;
 
@@ -15,8 +15,8 @@ namespace main{
                               Math.Pow(_mousePosition.y - transform.position.y, 2));
 
             float koef = (float) _dist;
-            if (_dist > limit){
-                koef = limit * (limit / koef);
+            if (_dist > _limit){
+                koef = _limit * (_limit / koef);
             }
             transform.position = Vector2.Lerp(transform.position, _mousePosition, koef / 100);
         }
