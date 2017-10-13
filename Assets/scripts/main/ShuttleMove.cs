@@ -18,7 +18,7 @@ namespace main{
             if (_dist > _limit){
                 koef = _limit * (_limit / koef);
             }
-            transform.position = Vector2.Lerp(transform.position, _mousePosition, koef / 100);
+            transform.position = Vector2.Lerp(transform.position, _mousePosition, koef / 300);
         }
     }
 }
