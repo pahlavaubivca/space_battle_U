@@ -20,5 +20,8 @@ namespace main{
             }
             transform.position = Vector2.Lerp(transform.position, _mousePosition, koef / 300);
         }
+        public void OnCollisionEnter(Collision collision){
+            Debug.Log("collision");
+        }
     }
 }

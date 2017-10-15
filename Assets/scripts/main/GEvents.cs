@@ -10,7 +10,7 @@ public class GEvents : MonoBehaviour{
     //private Array<Sprite> _sprite;
     private void Start(){
         //var _sprite = Resources.LoadAll("");
-         Bullet.BulletInit();
+        // Bullet.BulletInit();
         //var qwe = "adsf";
     }
 
