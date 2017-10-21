@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace main{
     public class Fire : MonoBehaviour{
-        public Rigidbody2D bullet;
+        public Rigidbody2D Bullet;
         private float bulletSpeed = 0.2f;
-        private int bulletCount = 0;
-        private bool firstB = false;
+        private int _bulletCount = 0;
 
         Dictionary<int, Rigidbody2D> bulletDictionary = new Dictionary<int, Rigidbody2D>();
 
@@ -16,16 +15,16 @@ namespace main{
             tempGO.AddComponent<Bullet>();
             var bulletCheck = tempGO.GetComponent<Bullet>();
             if (bulletCheck != null){
-                bullet = tempGO.GetComponent<Bullet>().CreateBullet();
+                Bullet = tempGO.GetComponent<Bullet>().CreateBullet();
                 Destroy(tempGO);
             }
         }
 
         public void CalculateStart(){
             Rigidbody2D bulletInstance =
-                Instantiate(bullet, transform.position, transform.rotation);
-            bulletDictionary.Add(bulletCount, bulletInstance);
-            bulletCount++;
+                Instantiate(Bullet, transform.position, transform.rotation);
+            bulletDictionary.Add(_bulletCount, bulletInstance);
+            _bulletCount++;
         }
 
         private void Update(){
