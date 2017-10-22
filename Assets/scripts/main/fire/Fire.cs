@@ -4,31 +4,40 @@ using UnityEngine;
 
 namespace main{
     public class Fire : MonoBehaviour{
-        public Rigidbody2D Bullet;
+        private Rigidbody2D Bullet;
         private float bulletSpeed = 0.2f;
-        private int _bulletCount = 0;
+        private GameObject thisUnit;
+        private EnemyAI _enemyAi;
 
-        Dictionary<int, Rigidbody2D> bulletDictionary = new Dictionary<int, Rigidbody2D>();
+        private List<Rigidbody2D> bulletList = new List<Rigidbody2D>();
 
         void Start(){
-            GameObject tempGO = new GameObject();
-            tempGO.AddComponent<Bullet>();
-            var bulletCheck = tempGO.GetComponent<Bullet>();
-            if (bulletCheck != null){
-                Bullet = tempGO.GetComponent<Bullet>().CreateBullet();
-                Destroy(tempGO);
+            GameObject tempGO = new GameObject("tempGo");
+            var _bullet = GameObject.Find("bullet");
+            if (_bullet == null){
+                Debug.Log("start fire script");
+                tempGO.AddComponent<Bullet>();
+
+                var bulletCheck = tempGO.GetComponent<Bullet>();
+                if (bulletCheck != null){
+                    Bullet = tempGO.GetComponent<Bullet>().CreateBullet();
+                    Destroy(tempGO);
+                }
+            } else{
+                Bullet = _bullet.GetComponent<Rigidbody2D>();
             }
+            thisUnit = this.gameObject;
+            _enemyAi = thisUnit.GetComponent<EnemyAI>();
         }
 
         public void CalculateStart(){
             Rigidbody2D bulletInstance =
-                Instantiate(Bullet, transform.position, transform.rotation);
-            bulletDictionary.Add(_bulletCount, bulletInstance);
-            _bulletCount++;
+                Instantiate(Bullet, thisUnit.transform.position, thisUnit.transform.rotation);
+            bulletList.Add(bulletInstance);
         }
 
         private void Update(){
-            if (Input.GetMouseButtonDown(0)){
+            if (Input.GetMouseButtonDown(0) && thisUnit.name == "shuttle"){
                 CalculateStart();
             }
         }
@@ -38,29 +47,27 @@ namespace main{
         }
 
         private void FixedUpdate(){
-            if (bulletDictionary.Count > 0){
-                foreach (var v in bulletDictionary){
-                    if (v.Value){
-                        if (Math.Abs(transform.position.x - v.Value.transform.position.x) > 4 ||
-                            Math.Abs(transform.position.y - v.Value.transform.position.y) > 4){
-                            bulletDictionary.Remove(v.Key);
-                            Destroy(v.Value.gameObject);
+            if (bulletList.Count > 0){
+                foreach (var bullet in bulletList){
+                    if (bullet != null){
+                        if (Math.Abs(thisUnit.transform.position.x - bullet.transform.position.x) > 4 ||
+                            Math.Abs(thisUnit.transform.position.y - bullet.transform.position.y) > 4){
+                            bulletList.Remove(bullet);
+                            Destroy(bullet.gameObject);
                             break;
-                        }
-                        else{
-                            Transform vt = v.Value.transform;
+                        } else{
+                            Transform vt = bullet.transform;
                             //var l = 0.1 / Math.Cos(vt.eulerAngles.z); // length gipotenyza from katet and angle
                             double x = vt.position.x + Math.Cos(ConvertToRadians(vt.eulerAngles.z)) * bulletSpeed;
                             double y = vt.position.y + Math.Sin(ConvertToRadians(vt.eulerAngles.z)) * bulletSpeed;
                             vt.position = new Vector3((float) x, (float) y, 0);
                         }
                     }
-                    else{
-                        Debug.Log("not found bullet");
-                        bulletDictionary.Remove(v.Key);
-                        break;
-                    }
                 }
+            }
+            if (_enemyAi && _enemyAi.EnemyFire){
+                Debug.Log("fire class, trigger fire");
+                CalculateStart();
             }
         }
     }

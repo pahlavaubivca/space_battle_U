@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace main{
     public class Shuttle : MonoBehaviour{
+        public bool ThisIsShuttle = true;
         void Update(){
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.transform.eulerAngles = new Vector3(0, 0,
