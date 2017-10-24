@@ -12,9 +12,9 @@ namespace main{
         private List<Rigidbody2D> bulletList = new List<Rigidbody2D>();
 
         void Start(){
-            GameObject tempGO = new GameObject("tempGo");
             var _bullet = GameObject.Find("bullet");
             if (_bullet == null){
+                GameObject tempGO = new GameObject("tempGo");
                 Debug.Log("start fire script");
                 tempGO.AddComponent<Bullet>();
 
@@ -33,6 +33,9 @@ namespace main{
         public void CalculateStart(){
             Rigidbody2D bulletInstance =
                 Instantiate(Bullet, thisUnit.transform.position, thisUnit.transform.rotation);
+            bulletInstance.gameObject.name = "bullet " + thisUnit.name;
+            //Debug.Log(bulletInstance.gameObject.name);
+            //Debug.Log(thisUnit.transform.position.x+" - x " + thisUnit.transform.position.y + " - y");
             bulletList.Add(bulletInstance);
         }
 
@@ -48,7 +51,9 @@ namespace main{
 
         private void FixedUpdate(){
             if (bulletList.Count > 0){
+                Debug.Log(bulletList.Count);
                 foreach (var bullet in bulletList){
+                   // Debug.Log("bullet" + thisUnit.name);
                     if (bullet != null){
                         if (Math.Abs(thisUnit.transform.position.x - bullet.transform.position.x) > 4 ||
                             Math.Abs(thisUnit.transform.position.y - bullet.transform.position.y) > 4){
@@ -62,11 +67,16 @@ namespace main{
                             double y = vt.position.y + Math.Sin(ConvertToRadians(vt.eulerAngles.z)) * bulletSpeed;
                             vt.position = new Vector3((float) x, (float) y, 0);
                         }
+                    } else {
+                        bulletList.Remove(bullet);
+                        break;
+                        
                     }
                 }
             }
             if (_enemyAi && _enemyAi.EnemyFire){
-                Debug.Log("fire class, trigger fire");
+                //Debug.Log("fire class, trigger fire");
+                _enemyAi.EnemyFire = false;
                 CalculateStart();
             }
         }

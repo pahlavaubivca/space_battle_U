@@ -26,16 +26,12 @@ public class EnemyAI : MonoBehaviour{
     private void fire(){
         var currentTime = System.DateTime.Now.Ticks;
         if (currentTime - _oldTime > 10000000){
-            Debug.Log("aaaaa");
+           // Debug.Log("aaaaa");
             if (_dist < 4.5){
                 EnemyFire = true;
-                Debug.Log("enemy fire, dist - " + _dist);
-                _oldTime = currentTime;
-                
+               // Debug.Log("enemy fire, dist - " + _dist);
             }
-            else if (EnemyFire){
-                EnemyFire = false;
-            }
+            _oldTime = currentTime;
         }
     }
 

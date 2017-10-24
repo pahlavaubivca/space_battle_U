@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace main{
     public class Bullet : MonoBehaviour{
+        public string BulletOwner;
         private Sprite _sprite;
         public Rigidbody2D CreateBullet(){
             getSprite();
