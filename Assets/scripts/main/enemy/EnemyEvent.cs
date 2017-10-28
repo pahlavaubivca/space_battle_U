@@ -13,7 +13,6 @@ namespace main{
 
         public void OnTriggerEnter2D(Collider2D other){
             if (bulletMatch.Match(other.gameObject.name).Length > 0){
-                
                 if (bulletEnemyNameMatch.Match(other.gameObject.name).Length <= 0){
                     lifeCount--;
                     if (lifeCount <= 0){

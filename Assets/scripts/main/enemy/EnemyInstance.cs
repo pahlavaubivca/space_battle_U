@@ -6,7 +6,8 @@ namespace main{
     public class EnemyInstance : MonoBehaviour{
         private GameObject enemy;
         List<Rigidbody2D> enemyList = new List<Rigidbody2D>();
-        private float left = 1.5f;
+        private float left = 2.5f;
+        private int _count = 0;
 
         private void Enemy(){
             SetSprite();
@@ -21,17 +22,19 @@ namespace main{
 
         void Start(){
             enemy = new GameObject("enemy");
-           // Debug.Log("enemy instance start");
             Enemy();
         }
 
         public void CreateEnemy(){
             Vector3 position = new Vector3(left,0.5f,0);
-            left++;
+            Quaternion rotation = new Quaternion(0,0,0,0);
             Rigidbody2D enemyClone =
-                Instantiate(enemy.GetComponent<Rigidbody2D>(), position, transform.rotation);
+                Instantiate(enemy.GetComponent<Rigidbody2D>(), position, rotation);
             //enemyClone.gameObject.AddComponent<PolygonCollider2D>();
+            enemyClone.name = "enemy " + _count;
             enemyList.Add(enemyClone);
+            _count++;
+            left++;
         }
 
         public void SetSprite(Sprite sprite = null){

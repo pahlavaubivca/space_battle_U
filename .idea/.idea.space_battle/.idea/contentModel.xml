@@ -16,10 +16,11 @@
           <e p="main" t="Include">
             <e p="controllRoom" t="Include">
               <e p="controllPanel.cs" t="Include" />
+              <e p="Spawn.cs" t="Include" />
             </e>
             <e p="enemy" t="Include">
-              <e p="Enemy.cs" t="Include" />
               <e p="EnemyAI.cs" t="Include" />
+              <e p="EnemyEvent.cs" t="Include" />
               <e p="EnemyInstance.cs" t="Include" />
             </e>
             <e p="fire" t="Include">
