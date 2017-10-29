@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using UnityEditor;
 using UnityEngine;
 
 public interface ISpawnHereParams{
@@ -8,6 +9,7 @@ public interface ISpawnHereParams{
     float y0{ get; set; }
     float x1{ get; set; }
     float y1{ get; set; }
+    float r{ get; set; }
 }
 
 public interface ISpanwHereReturn{
@@ -17,10 +19,19 @@ public interface ISpanwHereReturn{
 
 public class Spawn : MonoBehaviour{
     ISpanwHereReturn coordinate;
+    private List<Bounds> busyPoints = new List<Bounds>();
+
+    private void getColliderInArea(){
+        Collider2D[] coll = Physics2D.OverlapCircleAll(new Vector2(-3, 1), 5f);
+        foreach (Collider2D c in coll){
+            busyPoints.Add(c.bounds);
+        }
+    }
+
     public ISpanwHereReturn SpawnHere(ISpawnHereParams param){
         float x = 0;
         float y = 0;
-        
+        getColliderInArea();
         coordinate.x = x;
         coordinate.y = y;
         return coordinate;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace main{
-    public class controllPanel : MonoBehaviour{
+    public class ControllPanel : MonoBehaviour{
         //private GameObject _all;
 
         public void AddEnemy(){
