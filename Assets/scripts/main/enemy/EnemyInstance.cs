@@ -25,8 +25,8 @@ namespace main{
             Enemy();
         }
 
-        public void CreateEnemy(){
-            Vector3 position = new Vector3(left,0.5f,0);
+        public Rigidbody2D CreateEnemy(){
+            Vector3 position = new Vector3(left,100000.5f,0);
             Quaternion rotation = new Quaternion(0,0,0,0);
             Rigidbody2D enemyClone =
                 Instantiate(enemy.GetComponent<Rigidbody2D>(), position, rotation);
@@ -35,6 +35,7 @@ namespace main{
             enemyList.Add(enemyClone);
             _count++;
             left++;
+            return enemyClone;
         }
 
         public void SetSprite(Sprite sprite = null){
