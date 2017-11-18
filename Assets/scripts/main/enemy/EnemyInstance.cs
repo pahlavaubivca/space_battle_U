@@ -6,7 +6,7 @@ namespace main{
     public class EnemyInstance : MonoBehaviour{
         private GameObject enemy;
         List<Rigidbody2D> enemyList = new List<Rigidbody2D>();
-        private float left = 2.5f;
+        private float left = 100.5f;
         private int _count = 0;
 
         private void Enemy(){
@@ -15,6 +15,7 @@ namespace main{
             enemy.AddComponent<Rigidbody2D>();
             enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
             enemy.transform.position = new Vector3(10000000, 0, 0);
+            enemy.transform.localScale = new Vector3(50,50,0);
             enemy.AddComponent<Enemy>();
             enemy.AddComponent<EnemyAI>();
             enemy.AddComponent<Fire>();

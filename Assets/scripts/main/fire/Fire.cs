@@ -5,8 +5,9 @@ using UnityEngine;
 namespace main{
     public class Fire : MonoBehaviour{
         private Rigidbody2D Bullet;
-        private float bulletSpeed = 0.2f;
+        private float bulletSpeed = 8f;
         private GameObject thisUnit;
+        private float bulletDistance = 450;
 
         private List<Rigidbody2D> bulletList = new List<Rigidbody2D>();
 
@@ -41,8 +42,8 @@ namespace main{
             if (bulletList.Count > 0){
                 foreach (var bullet in bulletList){
                     if (bullet != null){
-                        if (Math.Abs(thisUnit.transform.position.x - bullet.transform.position.x) > 4 ||
-                            Math.Abs(thisUnit.transform.position.y - bullet.transform.position.y) > 4){
+                        if (Math.Abs(thisUnit.transform.position.x - bullet.transform.position.x) > bulletDistance ||
+                            Math.Abs(thisUnit.transform.position.y - bullet.transform.position.y) > bulletDistance){
                             bulletList.Remove(bullet);
                             Destroy(bullet.gameObject);
                             break;

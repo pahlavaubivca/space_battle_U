@@ -15,6 +15,7 @@
         <e p="scripts" t="Include">
           <e p="main" t="Include">
             <e p="controllRoom" t="Include">
+              <e p="CameraPosition.cs" t="Include" />
               <e p="controllPanel.cs" t="Include" />
               <e p="Spawn.cs" t="Include" />
             </e>
@@ -29,7 +30,6 @@
             </e>
             <e p="shuttle" t="Include">
               <e p="Shuttle.cs" t="Include" />
-              <e p="ShuttleMove.cs" t="Include" />
             </e>
           </e>
         </e>

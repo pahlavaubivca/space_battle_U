@@ -16,6 +16,7 @@ namespace main{
             bullet.GetComponent<CircleCollider2D>().isTrigger = true;
             bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
             bullet.transform.position = new Vector3(-100000, 0, 0);
+            bullet.transform.localScale = new Vector3(50,50,0);
             return bullet.GetComponent<Rigidbody2D>();
         }
 

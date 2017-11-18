@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\main\controllRoom\CameraPosition.cs" />
     <Compile Include="Assets\scripts\main\controllRoom\ControllPanel.cs" />
     <Compile Include="Assets\scripts\main\controllRoom\Spawn.cs" />
     <Compile Include="Assets\scripts\main\enemy\EnemyAI.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Assets\scripts\main\fire\Bullet.cs" />
     <Compile Include="Assets\scripts\main\fire\Fire.cs" />
     <Compile Include="Assets\scripts\main\shuttle\Shuttle.cs" />
-    <Compile Include="Assets\scripts\main\shuttle\ShuttleMove.cs" />
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
