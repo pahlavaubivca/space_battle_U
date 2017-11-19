@@ -28,8 +28,15 @@ namespace main{
         }
 
         public void CalculateStart(){
+            Vector3 bulletSize = Bullet.GetComponent<Renderer>().bounds.size;
+            float ang = thisUnit.transform.eulerAngles.z;
+            int forX = ang > 180 ? -1 : 1;
+            int forY = ang > 90 && ang < 270 ? 1 : -1;
+            Vector2 bulletPosition = new Vector2(thisUnit.transform.position.x + bulletSize.x / 2 * forX,
+                thisUnit.transform.position.y + bulletSize.y / 2 * forY);
+
             Rigidbody2D bulletInstance =
-                Instantiate(Bullet, thisUnit.transform.position, thisUnit.transform.rotation);
+                Instantiate(Bullet, bulletPosition, thisUnit.transform.rotation);
             bulletInstance.gameObject.name = "bullet " + thisUnit.name;
             bulletList.Add(bulletInstance);
         }
@@ -50,11 +57,11 @@ namespace main{
                         } else{
                             Transform vt = bullet.transform;
                             //var l = 0.1 / Math.Cos(vt.eulerAngles.z); // length gipotenyza from katet and angle
-                            double x = vt.position.x + Math.Cos(ConvertToRadians(vt.eulerAngles.z)) * bulletSpeed;
-                            double y = vt.position.y + Math.Sin(ConvertToRadians(vt.eulerAngles.z)) * bulletSpeed;
+                            double x = vt.position.x + Math.Cos(vt.eulerAngles.z * Mathf.Deg2Rad) * bulletSpeed;
+                            double y = vt.position.y + Math.Sin(vt.eulerAngles.z * Mathf.Deg2Rad) * bulletSpeed;
                             vt.position = new Vector3((float) x, (float) y, 0);
                         }
-                    } else {
+                    } else{
                         bulletList.Remove(bullet);
                         break;
                     }
