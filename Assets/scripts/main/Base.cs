@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Base : MonoBehaviour {
@@ -24,10 +25,14 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	public void AngleToPoint(Vector2 to){
-		transform.transform.eulerAngles = new Vector3(0, 0,
-			Mathf.Atan2(to.y - transform.position.y, to.x - transform.position.x) *
+	public void AngleToPoint(Vector2 to, float delta = 1){
+		var diffY = to.y - transform.position.y;
+		var diffX = to.x - transform.position.x;
+		Vector3 needAngle = new Vector3(0, 0,
+			Mathf.Atan2(diffY, diffX) *
 			Mathf.Rad2Deg);
+		var ang = Mathf.LerpAngle(transform.eulerAngles.z, needAngle.z, delta);
+		transform.transform.eulerAngles = new Vector3(0,0,ang);
 	}
 	public float Distance(float x0, float x1, float y0, float y1){
 		return (float) Math.Sqrt(Math.Pow(x0 - x1, 2) +

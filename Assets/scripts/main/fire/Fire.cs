@@ -41,6 +41,14 @@ namespace main{
             bulletList.Add(bulletInstance);
         }
 
+        public void ClearAll(){
+            foreach (var k in bulletList){
+                if (k != null){
+                    Destroy(k.gameObject);
+                }
+            }
+        }
+
         private void FixedUpdate(){
             if (bulletList.Count > 0){
                 foreach (var bullet in bulletList){

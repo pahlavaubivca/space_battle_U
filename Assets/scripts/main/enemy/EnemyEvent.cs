@@ -6,7 +6,7 @@ namespace main{
         Regex bulletMatch = new Regex("bullet");
         Regex bulletEnemyNameMatch = new Regex("enemy");
         private int lifeCount = 3;
-        
+
         public void OnCollisionEnter2D(Collision2D collision){
             // Debug.Log("collision");
         }
@@ -16,7 +16,10 @@ namespace main{
                 if (bulletEnemyNameMatch.Match(other.gameObject.name).Length <= 0){
                     lifeCount--;
                     if (lifeCount <= 0){
+                        //gameObject.GetComponent<Fire>().ClearAll();
+                        gameObject.GetComponent<Fire>().ClearAll();
                         Destroy(gameObject);
+//                        gameObject.SetActive(false);
                     }
                     // Debug.Log("life remaining - " + lifeCount);
                     Destroy(other.gameObject);

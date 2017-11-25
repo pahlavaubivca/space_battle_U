@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour{
     private long _oldTime = 0;
     private Fire _fire;
     private float fireDistance = 240f;
+    private float attentionDistance = 400f;
     private Base _base;
 
     void Start(){
@@ -21,8 +22,11 @@ public class EnemyAI : MonoBehaviour{
     }
 
     private void attentionOnShuttle(){
-        if (_dist < fireDistance){
-            _base.AngleToPoint(_shuttle.gameObject.transform.position);
+        if (_dist < attentionDistance){
+            _base.AngleToPoint(_shuttle.gameObject.transform.position,0.1f);
+            _base.MoveGameObject(_shuttle.transform.position, 100, 70);
+        } else{
+            
         }
     }
 

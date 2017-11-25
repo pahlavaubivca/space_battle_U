@@ -28,7 +28,7 @@ namespace main{
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePositionRelateScreen = new Vector2(Input.mousePosition.x - Screen.width / 2,
                 Input.mousePosition.y - Screen.height / 2);
-            _base.AngleToPoint(mousePosition);
+            _base.AngleToPoint(mousePosition, 0.2f);
             _base.MoveGameObject(mousePositionRelateScreen, maxSpeed ,_limit);
         }
     }
