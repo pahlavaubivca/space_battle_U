@@ -14,6 +14,7 @@
         </e>
         <e p="scripts" t="Include">
           <e p="main" t="Include">
+            <e p="Base.cs" t="Include" />
             <e p="controllRoom" t="Include">
               <e p="CameraPosition.cs" t="Include" />
               <e p="controllPanel.cs" t="Include" />

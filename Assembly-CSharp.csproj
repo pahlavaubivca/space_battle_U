@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\scripts\main\Base.cs" />
     <Compile Include="Assets\scripts\main\controllRoom\CameraPosition.cs" />
     <Compile Include="Assets\scripts\main\controllRoom\ControllPanel.cs" />
     <Compile Include="Assets\scripts\main\controllRoom\Spawn.cs" />
