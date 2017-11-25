@@ -10,9 +10,9 @@ namespace main{
         private float _limit = 100f;
         private float maxSpeed = 120f;
         private float speedreduction = 11.5f;
-        private Vector2 _mousePosition;
-        private double _dist;
-        private GameObject shuttlePosition;
+//        private Vector2 _mousePosition;
+//        private double _dist;
+//        private GameObject shuttlePosition;
         private Rigidbody2D _rigidBody;
 
         void Start(){
@@ -31,15 +31,16 @@ namespace main{
             transform.transform.eulerAngles = new Vector3(0, 0,
                 Mathf.Atan2(mousePosition.y - transform.position.y, mousePosition.x - transform.position.x) *
                 Mathf.Rad2Deg);
-            _mousePosition = new Vector2(Input.mousePosition.x - Screen.width / 2,
+            
+            Vector2 _mousePosition = new Vector2(Input.mousePosition.x - Screen.width / 2,
                 Input.mousePosition.y - Screen.height / 2);
-            _dist = distance(_mousePosition.x, 0, _mousePosition.y, 0);
+            double _dist = distance(_mousePosition.x, 0, _mousePosition.y, 0);
             if (_dist > _limit){
                 double x = _limit * Math.Cos(transform.transform.eulerAngles.z * Mathf.Deg2Rad);
                 double y = _limit * Math.Sin(transform.transform.eulerAngles.z * Mathf.Deg2Rad);
                 _mousePosition = new Vector2((float)x,(float)y);
             }
-//            _rigidBody.AddForce(_mousePosition);
+            _rigidBody.AddForce(_mousePosition);
             if (_rigidBody.velocity.magnitude > maxSpeed){
                 _rigidBody.velocity = _rigidBody.velocity.normalized * maxSpeed;
             }

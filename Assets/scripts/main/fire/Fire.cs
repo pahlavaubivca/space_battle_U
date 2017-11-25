@@ -41,10 +41,6 @@ namespace main{
             bulletList.Add(bulletInstance);
         }
 
-        public double ConvertToRadians(double angle){
-            return Math.PI / 180 * angle;
-        }
-
         private void FixedUpdate(){
             if (bulletList.Count > 0){
                 foreach (var bullet in bulletList){

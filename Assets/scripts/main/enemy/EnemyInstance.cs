@@ -12,17 +12,13 @@ namespace main{
         private void Enemy(){
             SetSprite();
             enemy.AddComponent<PolygonCollider2D>();
-            enemy.AddComponent<CharacterController>();
-            Vector3 size = enemy.GetComponent<PolygonCollider2D>().bounds.size;
-            enemy.GetComponent<CharacterController>().center = new Vector3(enemy.transform.position.x - size.x / 2, enemy.transform.position.y - size.y / 2, 0);
             enemy.AddComponent<Rigidbody2D>();
             enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
-            //enemy.transform.RotateAround(Vector3.zero);
             enemy.transform.position = new Vector3(10000000, 0, 0);
             enemy.transform.localScale = new Vector3(50, 50, 0);
             enemy.AddComponent<Enemy>();
-            //enemy.AddComponent<EnemyAI>();
-            //enemy.AddComponent<Fire>();
+            enemy.AddComponent<EnemyAI>();
+            enemy.AddComponent<Fire>();
         }
 
         void Start(){
@@ -34,7 +30,7 @@ namespace main{
             Vector3 position = new Vector3(left, 100000.5f, 0);
             Quaternion rotation = new Quaternion(0, 0, 0, 0);
             Rigidbody2D enemyClone =
-                Instantiate(enemy.GetComponent<Rigidbody2D>(), position, Quaternion.identity);
+                Instantiate(enemy.GetComponent<Rigidbody2D>(), position, rotation);
             //enemyClone.gameObject.AddComponent<PolygonCollider2D>();
             enemyClone.name = "enemy " + _count;
             enemyList.Add(enemyClone);
@@ -45,12 +41,12 @@ namespace main{
 
         public void SetSprite(Sprite sprite = null){
             sprite = sprite != null ? sprite : defaultSprite();
-            if (sprite != null){
-                enemy.AddComponent<SpriteRenderer>();
-                enemy.GetComponent<SpriteRenderer>().sprite =
-                    Sprite.Create(sprite.texture, sprite.textureRect, sprite.textureRectOffset);
-                enemy.GetComponent<SpriteRenderer>().color = Color.red;
-            }
+            // TODO define how calculate offset for sprite without gavno koefficientiv
+            Vector2 offset = new Vector2(sprite.bounds.max.x * 1.13f / 2, sprite.bounds.max.y * 1.65f / 2);
+            enemy.AddComponent<SpriteRenderer>();
+            enemy.GetComponent<SpriteRenderer>().sprite =
+                Sprite.Create(sprite.texture, sprite.textureRect, offset);
+            enemy.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         private Sprite defaultSprite(){

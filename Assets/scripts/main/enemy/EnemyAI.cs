@@ -10,6 +10,7 @@ public class EnemyAI : MonoBehaviour{
     private GameObject _thisEnemy;
     private long _oldTime = 0;
     private Fire _fire;
+    private float fireDistance = 240f;
 
     void Start(){
         _shuttle = GameObject.Find("shuttle");
@@ -23,7 +24,7 @@ public class EnemyAI : MonoBehaviour{
     }
 
     private void attentionOnShuttle(){
-        if (_dist < 204.5){
+        if (_dist < fireDistance){
             transform.transform.eulerAngles = new Vector3(0, 0,
                 Mathf.Atan2((_shuttle.gameObject.transform.position.y - transform.position.y),
                     (_shuttle.gameObject.transform.position.x - transform.position.x)) *
@@ -34,7 +35,7 @@ public class EnemyAI : MonoBehaviour{
     private void fire(){
         var currentTime = System.DateTime.Now.Ticks;
         if (currentTime - _oldTime > 10000000){
-            if (_dist < 240.5){
+            if (_dist < fireDistance){
                _fire.CalculateStart();
             }
             _oldTime = currentTime;
