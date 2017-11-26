@@ -20,6 +20,7 @@ public class Base : MonoBehaviour {
 			}
 		}
 		_rigidBody.AddForce(toPoint);
+//		_rigidBody.AddForceAtPosition(toPoint, transform.position);
 		if (_rigidBody.velocity.magnitude > maxSpeed){
 			_rigidBody.velocity = _rigidBody.velocity.normalized * maxSpeed;
 		}

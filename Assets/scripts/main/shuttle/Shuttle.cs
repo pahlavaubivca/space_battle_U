@@ -10,7 +10,9 @@ namespace main{
         private float _limit = 100f;
         private float maxSpeed = 120f;
         private float speedreduction = 11.5f;
+
         private Base _base;
+
 //        private Rigidbody2D _rigidBody;
         void Start(){
             _fire = this.GetComponent<Fire>();
@@ -26,10 +28,9 @@ namespace main{
 
         private void FixedUpdate(){
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mousePositionRelateScreen = new Vector2(Input.mousePosition.x - Screen.width / 2,
-                Input.mousePosition.y - Screen.height / 2);
+            Vector2 mousePositionRelateScreen = new Vector2(Input.mousePosition.x - Screen.width / 2, Input.mousePosition.y - Screen.height / 2);
             _base.AngleToPoint(mousePosition, 0.2f);
-            _base.MoveGameObject(mousePositionRelateScreen, maxSpeed ,_limit);
+            _base.MoveGameObject(mousePositionRelateScreen, maxSpeed, _limit);
         }
     }
 }

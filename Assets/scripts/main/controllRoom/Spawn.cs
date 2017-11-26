@@ -60,7 +60,7 @@ public class Spawn : MonoBehaviour{
                 startCount++;
             } else{
                 startCount = oldStartCount;
-                step++;
+                step += 1;
             }
         }
     }
