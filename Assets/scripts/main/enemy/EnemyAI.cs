@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour{
     private Vector2 toHomePoint = new Vector2(5,5);
     private float[] toHomeBoxMin;
     private float[] toHomeBoxMax;
-    private float toHomeBoxHalfSize = 30f;
+    private float toHomeBoxHalfSize = 10f;
     private Base _base;
     
     void Start(){
@@ -36,9 +36,10 @@ public class EnemyAI : MonoBehaviour{
             bool outHome = (transform.position.x > toHomeBoxMax[0] || transform.position.x < toHomeBoxMin[0]) &&
                            (transform.position.y > toHomeBoxMax[1] || transform.position.y < toHomeBoxMin[1]);
             if (outHome){
-                Debug.Log("GO HOME - " + toHomePoint);
-                _base.AngleToPoint(toHomePoint, 0.1f);
-                _base.MoveGameObject(toHomePoint, 100);
+//                Debug.Log("GO HOME - " + toHomePoint);
+//                _base.AngleToPoint(toHomePoint, 0.1f);
+//                float[] toPoint = _base.DefineDirectionFromCoordinate(toHomePoint.x, toHomePoint.y);
+//                _base.MoveGameObject(new Vector2(toPoint[0], toPoint[1]), 100);
             } else{
 //                _base.AngleToPoint(toHomePoint, 0.1f);
 //                _base.MoveGameObject(toHomePoint, 75, 70);

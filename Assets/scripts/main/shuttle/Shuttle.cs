@@ -8,7 +8,7 @@ namespace main{
     public class Shuttle : MonoBehaviour{
         private Fire _fire;
         private float _limit = 100f;
-        private float maxSpeed = 120f;
+        private float maxSpeed = 170f;
         private float speedreduction = 11.5f;
 
         private Base _base;
