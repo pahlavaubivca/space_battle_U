@@ -17,5 +17,23 @@ namespace main{
             //_spawn = gameObject.AddComponent<Spawn>();
             gameObject.AddComponent<EnemyInstance>();
         }
+
+        void Update(){
+            if (Input.GetKeyDown(KeyCode.E)){
+                AddEnemy();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1)){
+                // for shuttle simple bullet
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2)){
+                // for shuttle shutgun bullet
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3)){
+                // for shuttle simple laser
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4)){
+                // for shuttle simple rocket
+            }
+        }
     }
 }

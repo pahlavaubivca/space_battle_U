@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace main{
     public class Shuttle : MonoBehaviour{
+        public int BulletType = 1;
         private Fire _fire;
         private float _limit = 100f;
         private float maxSpeed = 170f;
@@ -15,7 +16,8 @@ namespace main{
 
 //        private Rigidbody2D _rigidBody;
         void Start(){
-            _fire = this.GetComponent<Fire>();
+            _fire = GetComponent<Fire>();
+            //_fire.bulletType = 2;
 //            _rigidBody = gameObject.GetComponent<Rigidbody2D>();
             _base = gameObject.AddComponent<Base>();
         }

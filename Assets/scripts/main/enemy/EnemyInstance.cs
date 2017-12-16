@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace main{
     public class EnemyInstance : MonoBehaviour{
+        public int BulletType = 1;
         private GameObject enemy;
         List<Rigidbody2D> enemyList = new List<Rigidbody2D>();
         private float left = 100.5f;

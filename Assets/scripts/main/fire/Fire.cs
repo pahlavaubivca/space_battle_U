@@ -4,69 +4,61 @@ using UnityEngine;
 
 namespace main{
     public class Fire : MonoBehaviour{
-        private Rigidbody2D Bullet;
-        private float bulletSpeed = 8f;
-        private GameObject thisUnit;
-        private float bulletDistance = 450;
-
-        private List<Rigidbody2D> bulletList = new List<Rigidbody2D>();
-
-        void Start(){
-            var _bullet = GameObject.Find("bullet");
-            if (_bullet == null){
-                GameObject tempGO = new GameObject("tempGo");
-                tempGO.AddComponent<Bullet>();
-                var bulletCheck = tempGO.GetComponent<Bullet>();
-                if (bulletCheck != null){
-                    Bullet = tempGO.GetComponent<Bullet>().CreateBullet();
-                    Destroy(tempGO);
-                }
-            } else{
-                Bullet = _bullet.GetComponent<Rigidbody2D>();
-            }
-            thisUnit = this.gameObject;
-        }
+        public int bulletType = 1;
+        private Dictionary<Rigidbody2D, BulletInstance> bulletDictionary = new Dictionary<Rigidbody2D, BulletInstance>();
 
         public void CalculateStart(){
-            Vector3 bulletSize = Bullet.GetComponent<Renderer>().bounds.size;
-            float ang = thisUnit.transform.eulerAngles.z;
-            int forX = ang > 180 ? -1 : 1;
-            int forY = ang > 90 && ang < 270 ? 1 : -1;
-            Vector2 bulletPosition = new Vector2(thisUnit.transform.position.x + bulletSize.x / 2 * forX,
-                thisUnit.transform.position.y + bulletSize.y / 2 * forY);
+            BulletInstance _currentBullet = null;
+            foreach (var bullet in ImplementedBullet.ImplementedBulletList){
+                if (bulletType == bullet.EnumType)
+                    _currentBullet = bullet;
+            }
+            if (_currentBullet != null){
+                Vector3 bulletSize = _currentBullet.RBody.gameObject.GetComponent<Renderer>().bounds.size;
+                float ang = transform.eulerAngles.z;
+                int forX = ang > 180 ? -1 : 1;
+                int forY = ang > 90 && ang < 270 ? 1 : -1;
+                Vector2 bulletPosition = new Vector2(transform.position.x + bulletSize.x / 2 * forX,
+                    transform.position.y + bulletSize.y / 2 * forY);
 
-            Rigidbody2D bulletInstance =
-                Instantiate(Bullet, bulletPosition, thisUnit.transform.rotation);
-            bulletInstance.gameObject.name = "bullet " + thisUnit.name;
-            bulletList.Add(bulletInstance);
+                Rigidbody2D bulletInstance =
+                    Instantiate(_currentBullet.RBody, bulletPosition, transform.rotation);
+                /*
+                 * transfer bullet information, name destroy force, in GO name
+                 */
+                bulletInstance.gameObject.name = "bullet " + name;
+                bulletInstance.gameObject.AddComponent<UnityBulletInstance>();
+                bulletInstance.gameObject.GetComponent<UnityBulletInstance>().DestroyForce = _currentBullet.DestroyForce;
+                bulletDictionary.Add(bulletInstance, _currentBullet);
+            }
         }
 
         public void ClearAll(){
-            foreach (var k in bulletList){
-                if (k != null){
-                    Destroy(k.gameObject);
+            foreach (var k in bulletDictionary){
+                if (k.Key != null){
+                    Destroy(k.Key.gameObject);
                 }
             }
         }
 
         private void FixedUpdate(){
-            if (bulletList.Count > 0){
-                foreach (var bullet in bulletList){
-                    if (bullet != null){
-                        if (Math.Abs(thisUnit.transform.position.x - bullet.transform.position.x) > bulletDistance ||
-                            Math.Abs(thisUnit.transform.position.y - bullet.transform.position.y) > bulletDistance){
-                            bulletList.Remove(bullet);
-                            Destroy(bullet.gameObject);
+            if (bulletDictionary.Count > 0){
+                foreach (var bullet in bulletDictionary){
+                    if (bullet.Key != null){
+                        if (Math.Abs(transform.position.x - bullet.Key.transform.position.x) > bullet.Value.Range ||
+                            Math.Abs(transform.position.y - bullet.Key.transform.position.y) > bullet.Value.Range){
+                            bulletDictionary.Remove(bullet.Key);
+                            Destroy(bullet.Key.gameObject);
                             break;
                         } else{
-                            Transform vt = bullet.transform;
+                            Transform vt = bullet.Key.transform;
                             //var l = 0.1 / Math.Cos(vt.eulerAngles.z); // length gipotenyza from katet and angle
-                            double x = vt.position.x + Math.Cos(vt.eulerAngles.z * Mathf.Deg2Rad) * bulletSpeed;
-                            double y = vt.position.y + Math.Sin(vt.eulerAngles.z * Mathf.Deg2Rad) * bulletSpeed;
+                            double x = vt.position.x + Math.Cos(vt.eulerAngles.z * Mathf.Deg2Rad) * bullet.Value.Speed;
+                            double y = vt.position.y + Math.Sin(vt.eulerAngles.z * Mathf.Deg2Rad) * bullet.Value.Speed;
                             vt.position = new Vector3((float) x, (float) y, 0);
                         }
                     } else{
-                        bulletList.Remove(bullet);
+                        bulletDictionary.Remove(bullet.Key);
                         break;
                     }
                 }
