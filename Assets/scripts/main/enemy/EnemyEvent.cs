@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace main{
-    public class Enemy : MonoBehaviour{
+    public class EnemyCollideTrigger : MonoBehaviour{
         Regex bulletMatch = new Regex("bullet");
         Regex bulletEnemyNameMatch = new Regex("enemy");
         private int lifeCount = 3;

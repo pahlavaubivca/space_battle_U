@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour{
         bool outHome = (transform.position.x > toHomeBoxMax[0] || transform.position.x < toHomeBoxMin[0]) &&
                        (transform.position.y > toHomeBoxMax[1] || transform.position.y < toHomeBoxMin[1]);
         if (outHome){
-            _base.AngleToPoint(toHomePoint, 0.1f);
+            _base.AngleToPoint(toHomePoint, 0.03f);
             float[] toPoint = _base.DefineDirectionFromCoordinate(toHomePoint.x, toHomePoint.y);
             _base.MoveGameObject(new Vector2(toPoint[0], toPoint[1]), 30);
         }

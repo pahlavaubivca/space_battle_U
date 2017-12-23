@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace main{
+    
+    public static class EnemyCollection{}
     public class EnemyInstance : MonoBehaviour{
         public int BulletType = 1;
         private GameObject enemy;
@@ -11,7 +13,7 @@ namespace main{
         private int _count = 0;
         private Spawn _spawn;
 
-        private void Enemy(){
+        private void Enemye(){
             SetSprite();
             enemy.AddComponent<PolygonCollider2D>();
             enemy.AddComponent<Rigidbody2D>();
@@ -24,7 +26,7 @@ namespace main{
         void Start(){
             enemy = new GameObject("enemy");
             _spawn = gameObject.AddComponent<Spawn>();
-            Enemy();
+            Enemye();
         }
 
         public Rigidbody2D CreateEnemy(float x, float y){
@@ -34,7 +36,7 @@ namespace main{
             Quaternion rotation = new Quaternion(0, 0, 0, 0);
             Rigidbody2D enemyClone = Instantiate(enemy.GetComponent<Rigidbody2D>(), position, rotation);
             enemyClone.gameObject.AddComponent<EnemyAI>();
-            enemyClone.gameObject.AddComponent<Enemy>();
+            enemyClone.gameObject.AddComponent<EnemyCollideTrigger>();
             enemyClone.gameObject.AddComponent<Fire>();
             enemyClone.name = "enemy " + _count;
             enemyList.Add(enemyClone);

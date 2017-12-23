@@ -5,10 +5,10 @@ using UnityEngine;
 namespace main{
     public class Fire : MonoBehaviour{
         public int bulletType = 1;
-        private Dictionary<Rigidbody2D, BulletInstance> bulletDictionary = new Dictionary<Rigidbody2D, BulletInstance>();
+        private Dictionary<Rigidbody2D, BulletCollection> bulletDictionary = new Dictionary<Rigidbody2D, BulletCollection>();
 
         public void CalculateStart(){
-            BulletInstance _currentBullet = null;
+            BulletCollection _currentBullet = null;
             foreach (var bullet in ImplementedBullet.ImplementedBulletList){
                 if (bulletType == bullet.EnumType)
                     _currentBullet = bullet;
@@ -51,11 +51,9 @@ namespace main{
                             Destroy(bullet.Key.gameObject);
                             break;
                         } else{
-                            Transform vt = bullet.Key.transform;
-                            //var l = 0.1 / Math.Cos(vt.eulerAngles.z); // length gipotenyza from katet and angle
-                            double x = vt.position.x + Math.Cos(vt.eulerAngles.z * Mathf.Deg2Rad) * bullet.Value.Speed;
-                            double y = vt.position.y + Math.Sin(vt.eulerAngles.z * Mathf.Deg2Rad) * bullet.Value.Speed;
-                            vt.position = new Vector3((float) x, (float) y, 0);
+                            if (bullet.Value.DirectionType == "straight"){
+                                StaightDirection(bullet);
+                            }
                         }
                     } else{
                         bulletDictionary.Remove(bullet.Key);
@@ -64,5 +62,7 @@ namespace main{
                 }
             }
         }
+
+        
     }
 }
