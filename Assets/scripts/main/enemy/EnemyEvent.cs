@@ -13,15 +13,15 @@ namespace main{
 
         public void OnTriggerEnter2D(Collider2D other){
             if (bulletMatch.Match(other.gameObject.name).Length > 0){
-                var asd = other.gameObject.GetComponent<UnityBulletInstance>();
+                //var asd = other.gameObject.GetComponent<UnityBulletInstance>();
                 if (bulletEnemyNameMatch.Match(other.gameObject.name).Length <= 0){
-                    lifeCount--;
-                    if (lifeCount <= 0){
-                        gameObject.GetComponent<Fire>().ClearAll();
-                        Destroy(gameObject);
-                    }
-                    // Debug.Log("life remaining - " + lifeCount);
-                    Destroy(other.gameObject);
+//                    lifeCount--;
+//                    if (lifeCount <= 0){
+//                        gameObject.GetComponent<Fire>().ClearAll();
+//                        Destroy(gameObject);
+//                    }
+//                    // Debug.Log("life remaining - " + lifeCount);
+//                    Destroy(other.gameObject);
                 }
             }
         }

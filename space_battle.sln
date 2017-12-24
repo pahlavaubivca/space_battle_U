@@ -1,8 +1,9 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{9CAB8107-5C8F-40B1-7018-17DC18A9B69B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "space_battle", "Assembly-CSharp.csproj", "{9CAB8107-5C8F-40B1-7018-17DC18A9B69B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor-firstpass", "Assembly-CSharp-Editor-firstpass.csproj", "{F9780C58-BD0E-45CB-C52E-A839BB934276}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "space_battle", "Assembly-CSharp-Editor-firstpass.csproj", "{F9780C58-BD0E-45CB-C52E-A839BB934276}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
