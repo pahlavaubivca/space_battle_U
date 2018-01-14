@@ -10,9 +10,9 @@ public class EnemyAI : MonoBehaviour{
     private double _dist;
     private long _oldTime = 0;
     private Fire _fire;
-    private float fireDistance = 200f;
+    private float fireDistance = 2200f;
 
-    private float attentionDistance = 200f;
+    private float attentionDistance = 2200f;
 
     private Vector2 toHomePoint = new Vector2(5,5);
     private float[] toHomeBoxMin;

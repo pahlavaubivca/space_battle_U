@@ -9,7 +9,7 @@ namespace main{
         private Spawn _spawn;
 
         public void AddEnemy(){
-            Rigidbody2D enemy = gameObject.GetComponent<EnemyInstance>().CreateEnemy(-3, 1);
+            gameObject.GetComponent<EnemyInstance>().CreateEnemy(-3, 1);
         }
 
         void Start(){

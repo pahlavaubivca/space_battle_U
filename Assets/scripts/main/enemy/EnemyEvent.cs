@@ -5,7 +5,7 @@ namespace main{
     public class EnemyCollideTrigger : MonoBehaviour{
         Regex bulletMatch = new Regex("bullet");
         Regex bulletEnemyNameMatch = new Regex("enemy");
-        private int lifeCount = 3;
+//        private int lifeCount = 3;
 
         public void OnCollisionEnter2D(Collision2D collision){
             // Debug.Log("collision");

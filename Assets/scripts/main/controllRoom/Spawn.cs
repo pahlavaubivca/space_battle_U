@@ -15,7 +15,7 @@ public interface ISpanwHereReturn{
 
 public class Spawn : MonoBehaviour{
     ISpanwHereReturn coordinate;
-    private List<Bounds> busyPoints = new List<Bounds>();
+    // private List<Bounds> busyPoints = new List<Bounds>();
     private float _x0;
     private float _y0;
 
